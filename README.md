@@ -18,8 +18,9 @@ To do:
 - login + signup
 - data security (protect scripts and users)
 - script for unit 3 and 4
-- saving user progress (?)
+- saving user progress
+- leveling system
+- unlock coding pets
 
 Bonus:
-- make ui better
-- add mascot and branding
+- make ui better :(
