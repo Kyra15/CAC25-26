@@ -4,24 +4,25 @@ Done:
 - page layout + js for lesson
 - page layout + js for project editor
 - JSON loading for script
-- script done for all of unit 1
 - JSON loading for editor
 
 In progress:
-- grading system
+- grading system (quiz and ~~editor~~)
 - point system
 - page layout + js for home
-- script for unit 2
+- script for unit 1 + 2
+- JSON loading for quiz
+
 
 To do:
-- link all pages together + figure out structure
+- page navigation (back buttons)
 - figure out how to load json but like not from the js file
 - login + signup
 - data security (protect scripts and users)
 - script for unit 3 and 4
 - saving user progress
 - leveling system
-- unlock coding pets
+- unlock coding pets or some sort of reward
 
 BUGS:
 - need to tell next button when to stop and turn into the finish button (should take you back to the home screen)
