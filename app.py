@@ -1,0 +1,51 @@
+from flask import Flask, render_template, url_for, redirect, jsonify, request
+import contextlib
+import io
+from tqdm import tqdm
+import torch
+import numpy as np
+import pandas
+import sklearn
+import math
+import random
+# ok so one problem i have is that you can't import anything within the code editor
+# you have to do it up here
+
+# i love flask so much its not funny.
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return redirect(url_for("lesson"), code=302)
+
+@app.route("/lesson")
+def lesson():
+    return render_template('lesson.html')
+
+@app.route("/editor")
+def editor():
+    return render_template('editor.html')
+
+# erm
+@app.route('/run', methods=['POST'])
+def run_code():
+    # basically get from js and store in computer mem
+    code = request.json.get('code', '')
+    stdout = io.StringIO()
+
+    # then execute the code within and also have pytorch and then show error if u get one
+    try:
+        with contextlib.redirect_stdout(stdout):
+            exec(code, {"__builtins__": __builtins__, "torch": torch})
+        output = stdout.getvalue()
+    except Exception as e:
+        output = str(e)
+    
+    # export response as json (back to js)
+    response = jsonify({"output": output})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+if __name__ == '__main__':
+    app.run(debug=True, port=4200)
