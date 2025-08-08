@@ -34,10 +34,27 @@ def run_code():
     code = request.json.get('code', '')
     stdout = io.StringIO()
 
+    safe_builtins = {
+        'print': print,
+        'len': len,
+        'str': str,
+        'int': int,
+        'float': float,
+        'bool': bool,
+        'list': list,
+        'dict': dict,
+        'range': range,
+        'max': max,
+        'min': min,
+        'sum': sum,
+        'abs': abs,
+        'input': input,
+    }
+
     # then execute the code within and also have pytorch and then show error if u get one
     try:
         with contextlib.redirect_stdout(stdout):
-            exec(code, {"__builtins__": __builtins__, "torch": torch})
+            exec(code, {"__builtins__": safe_builtins, "torch": torch})
         output = stdout.getvalue()
     except Exception as e:
         output = str(e)

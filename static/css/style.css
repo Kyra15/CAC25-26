@@ -5,6 +5,7 @@
     --dark-green: #00b894;
     --light-gray: #dfe6e9;
     --dark-gray: #b2bec3;
+    --dark-purple: #6c5ce7;
 }
 
 * {
@@ -197,8 +198,8 @@ button:active {
     text-align: start;
     display: flex;
     flex-direction: column;
-    max-height: 90vh;
-    height: 90vh;
+    max-height: 87vh;
+    height: 87vh;
     overflow: hidden;
 }
 
@@ -373,4 +374,20 @@ button:active {
 
 figure {
     text-align: center;
+}
+
+.progress-container {
+    display: inline-block;
+    width: 80%;
+    height: 1%;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--light-gray);
+    margin-bottom: 10px
+}
+.progress-fill {
+    height: 100%;
+    background: var(--dark-purple);
+    width: 0%;
+    transition: width 1s ease;
 }

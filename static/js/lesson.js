@@ -19,7 +19,6 @@ async function fetchJSON(path) {
 }
 
 function updateHTML(data) {
-    console.log("balls", data)
     document.getElementById("lesson-title").innerText = data["title"];
     document.getElementById("unit-title").innerText = data["unit"];
 }
@@ -31,6 +30,10 @@ function showSection(sec) {
     const headSec = document.createElement("h2");
     const textSec = document.createElement("p");
 
+    const bar = document.getElementById("lesson-progressbar")
+
+    let sectionKeys = Object.keys(json_data).filter(key => key.startsWith("section"));
+
     headSec.innerHTML = sec["header"];
 
     textSec.style = "font-size: 16px;"
@@ -38,7 +41,6 @@ function showSection(sec) {
     document.getElementById("sec-text").append(newSec);
     newSec.append(headSec);
     newSec.append(textSec);
-    currentSectionIndex += 1;
 
     codefont(sec)
     findImage(sec, newSec)
@@ -56,7 +58,9 @@ function showSection(sec) {
     lessonText.scrollTo({
                 top: lessonText.scrollHeight,
                 behavior: 'smooth'
-            });
+                });
+    bar.style.width = `${(currentSectionIndex / sectionKeys.length) * 100}%`
+    currentSectionIndex += 1;
 }
 
 function codefont(sec) {
@@ -66,6 +70,16 @@ function codefont(sec) {
 
     while (sec["text"].indexOf("*/cf*") >= 0) { 
         sec["text"] = sec["text"].replace("*/cf*", '</span>')
+    }
+
+    if (sec["activity"]) {
+        while (sec["activity"].indexOf("*cf*") >= 0) {
+            sec["activity"] = sec["activity"].replace("*cf*", '<span style="font-family: &#34;Courier New&#34;, monospace;">')
+        }
+
+        while (sec["activity"].indexOf("*/cf*") >= 0) { 
+            sec["activity"] = sec["activity"].replace("*/cf*", '</span>')
+        }
     }
 }
 
@@ -90,8 +104,8 @@ function findImage(sec, new_sec) {
 
 function findQuiz(sec) {
     while (sec["text"].indexOf("*quiz*") >= 0) {
-        toggleQuiz();
         sec["text"] = sec["text"].replace("*quiz*", "<br>")
+        toggleQuiz();
     }
 }
 
@@ -118,33 +132,10 @@ function toggleQuiz() {
 
 function findEdit(sec) {
     while (sec["text"].indexOf("*edit*") >= 0) {
-        toggleEditor();
         sec["text"] = sec["text"].replace("*edit*", "<br>")
+        toggleEditor();
     }
 }
-
-// function toggleEditor() {
-//     const act_box = document.getElementsByClassName("activity-box")[0]
-//     const instruct = document.getElementsByClassName("instructions")[0]
-//     const mini_edit = document.getElementsByClassName("mini-editor")[0]
-//     const next_btn = document.getElementById("btn-span")
-// 
-//     if (act_box.classList.contains("hidden")) {
-//         console.log("unhidden")
-//         act_box.classList.remove("hidden")
-//         // instruct.classList.remove("hidden")
-//         // mini_edit.classList.remove("hidden")
-//         next_btn.classList.add("hidden")
-//         setTimeout(() => {
-//             initCodeMirror();
-//         }, 250);
-//     } else {
-//         act_box.classList.add("hidden")
-//         // instruct.classList.add("hidden")
-//         // mini_edit.classList.add("hidden")
-//         next_btn.classList.remove("hidden")
-//     }
-// }
 
 
 function toggleEditor() {
@@ -168,6 +159,8 @@ function toggleEditor() {
         act_box.style.height = targetHeight;
         
         next_btn.classList.add("hidden");
+
+        document.getElementById("directions").innerHTML = json_data[`section${currentSectionIndex}`]["activity"]
         
         setTimeout(() => {
             const lessonText = document.querySelector('.lesson-text');
@@ -177,6 +170,7 @@ function toggleEditor() {
             });
             act_box.style.overflow = "visible";
             initCodeMirror();
+            document.getElementById("submitcode").disabled = true
         }, 300);
         
     } else {
@@ -241,11 +235,15 @@ function initCodeMirror() {
 
 function addToOutput(s) {
     console.log(s)
-    output.value = ""
-    output.value += s + "\n";
+    const output_val = document.getElementById("output");
+    output_val.value = s;
 }
 
 function runCode() {
+    if ( document.getElementById("submitcode").disabled == true) {
+        document.getElementById("submitcode").disabled = false
+    }
+    
     output.value = "Loading..."
     fetch("http://127.0.0.1:4200/run", {
       method: "POST",
@@ -280,7 +278,7 @@ function giveHint() {
         const coords = editor.charCoords({ line: lastLine, ch: 0 }, "page");
         const editorCoords = editor.getWrapperElement().getBoundingClientRect();
 
-        hint.style.top = `${coords.top - editorCoords.top}px`;
+        hint.style.top = `${coords.top - editorCoords.top - 2.5}px`;
         hint.style.left = `${coords.left - editorCoords.left}px`;
     }
     else {
@@ -291,7 +289,45 @@ function giveHint() {
 
 
 function checkAnswerCode() {
-    sec = json_data[`section${currentSectionIndex}`]
+    sec = json_data[`section${currentSectionIndex - 1}`]
     // basically check if the code has the output we want and that the output has the number we want
+
+    input = editor.getValue()
+    output = document.getElementById("output").value
+
+    console.log("hi", input, output)
+
+    let is_correct = true
+
+    let input_ans = sec["answer"][0]
+    let output_ans = sec["answer"][1]
+
+    for (let i = 0; i < input_ans.length; i++) {
+        console.log(input_ans[i])
+        if (!input.includes(input_ans[i])) {
+            console.log("input wrong")
+            is_correct = false
+        }
+    }
+
+    for (let j = 0; j < output_ans.length; j++) {
+        console.log(output_ans[j])
+        if (!output.includes(output_ans[j])) {
+            console.log("output wrong")
+            is_correct = false
+        }
+    }
+
+    if (is_correct) {
+        toggleEditor()
+        nextSection()
+    } else {
+        incorrect()
+    }
+}
+
+
+function incorrect() {
+    pass
 }
 

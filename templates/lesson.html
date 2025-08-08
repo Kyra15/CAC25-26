@@ -12,6 +12,9 @@
         <section class="code-container">
             <h1 id="lesson-title">Poop</h1>
             <h3 id="unit-title">Poop</h3>
+            <div class="progress-container">
+                <div id="lesson-progressbar" class="progress-fill"></div>
+            </div>
             <div class="lesson-main">
                 <div class="lesson-header">
                     <div class="lesson-text" id="sec-text">
@@ -30,12 +33,7 @@
                     <div class="instructions hidden">
                         <button onclick="giveHint()" id="hint" class="hint">Hint</button>
                         <label style="border-top-right-radius: 10px; border-top-left-radius: 10px;"><b>Try it!</b>
-                            <span id="directions">Define a variable 
-                                <span style="font-family: &#34;Courier New&#34;, monospace;">my_num</span> 
-                                and set the value of it equal to 8. We can show this value with the 
-                                <span style="font-family: &#34;Courier New&#34;, monospace;">print()</span> 
-                                command.
-                            </span>
+                            <span id="directions">Nothing</span>
                         </label> 
                     </div>
                     <div class="mini-editor hidden">
@@ -43,8 +41,8 @@
                             <textarea id="code"></textarea>
                             <div class="code-overlay"></div>
                             <div style="display: flex; flex-direction: row; width: 100%">
-                                <button onclick="runCode()" style="flex: 1; border-radius: 0px; border-bottom-left-radius: 10px;">Run</button>
-                                <button onclick="checkAnswer()" style="flex: 1; border-radius: 0px; background-color: #6c5ce7;">Submit</button>
+                                <button id="runcode" onclick="runCode()" style="flex: 1; border-radius: 0px; border-bottom-left-radius: 10px;">Run</button>
+                                <button id="submitcode" onclick="checkAnswerCode()" style="flex: 1; border-radius: 0px; background-color: #6c5ce7;">Submit</button>
                             </div>
                         </div>
                         <div class="left">

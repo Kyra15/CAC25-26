@@ -12,24 +12,16 @@
         "header": "Assigning variables",
         "text": "Python will automatically create a variable whenever you first assign a value to it. Assigning is basically giving the variable a value, or putting the water into a bucket. In python, we <u>always</u> have to assign a value to a variable. We do this with the \"=\" sign.*edit*<br>For example:<br>*cf*variable = 'Hello World!'*/cf*<br>*cf*x = 1000*/cf*<br>*cf*pi = 3.14159*/cf*<br><br>In these scenarios, *cf*variable*/cf*, *cf*x*/cf*, and *cf*pi*/cf* are the labels on the buckets and *cf*'Hello World!'*/cf*, *cf*1000*/cf*, and *cf*3.14159*/cf* are the water!",
         "activity": "Define a variable *cf*my_num*/cf* and set the value of it equal to 8. Then, show that value using the *cf*print()*/cf* command.",
-        "answer": [["my_num = 8 print(my_num)"], ["8"]]
+        "answer": [["my_num = 8", "print(my_num)"], ["8"]]
     },
     "section3": {
         "header": "Basic data types",
-        "text": "We can assign a variable to hold any of the following <b>data types</b>:\n\nInteger: any <b>whole number</b>\nFloat: any <b>decimal</b>\nBoolean: either a *cf* True or *cf* False value\nString: a <b>series of characters</b>, surrounded by quotations marks (either single or double)*quiz*",
+        "text": "We can assign a variable to hold any of the following <b>data types</b>:<br>Integer: any <b>whole number</b><br>Float: any <b>decimal</b><br>Boolean: either a *cf*True*/cf* or *cf*False*/cf* value<br>String: a <b>series of characters</b>, surrounded by quotations marks (either single or double)*quiz*",
         "activity": {
             "Which of these options is a string?": ["9", "hello", "4.8", "'hello'"],
             "Which of these options is a boolean?": ["True", "bool", "&#34;True&#34;", "false"],
             "Which of these options is an integer?": ["87.0", "'16'", "2", "5.4"],
             "Which of these options is a decimal?": ["&#34;3.2&#34;", "'4'", "390", "100000.1"]
-        }
-    },
-    "section4": {
-        "header": "Casting",
-        "text": "We can also change the type of a variable. This is called <b>casting</b>.\nBe careful! You can only cast certain types of data.\nstr() is the most commonly used, and can apply to all data types\nint() will only work with integers, strings that consist <b>only</b> of numbers, and floats*box*\nfloat() works the same way as int but with decimals*box*",
-        "box": {
-            "1": "<span style='font-family: &#34;Courier New&#34;, monospace;'>print(int(3.4)) -> 3\nprint(int(“123”)) -> 123\nprint(int(“hello”) -> error</span>",
-            "2": "<span style='font-family: &#34;Courier New&#34;, monospace;'>print(float(3)) -> 3.0\nprint(float(“123.8”)) -> 123.8\nprint(float(“hello”) -> error</span>"
         }
     },
     "end": "Now you know the basics of Python's data system! Continue to the next lesson to learn how to use these variables."
