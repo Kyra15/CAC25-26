@@ -391,3 +391,52 @@ figure {
     width: 0%;
     transition: width 1s ease;
 }
+
+
+.signin-container {
+    background-color: var(--light-gray);
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    height: 70%;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid var(--dark-green);
+    border-radius: 10px;
+}
+
+.signup {
+    flex: 1;
+    color: var(--black);
+    text-align: center;
+    padding: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login {
+    flex: 1;
+    color: var(--black);
+    text-align: center;
+    padding: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    border-color: var(--black);
+    color: var(--black);
+}
+
+.input-fields {
+    flex: 0.7;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

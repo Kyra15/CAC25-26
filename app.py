@@ -17,7 +17,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return redirect(url_for("lesson"), code=302)
+    return redirect(url_for("signin"), code=302)
+
+@app.route("/signin")
+def signin():
+    return render_template('signin.html')
 
 @app.route("/lesson")
 def lesson():

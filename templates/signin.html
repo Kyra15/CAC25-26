@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html Lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lesson</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.css" />
+        <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+    <body style="background-color: var(--light-gray)">
+        <div class="signin-container">
+
+            <div class="signup">
+                <div style="flex: 0.2">
+                    <h1>Sign Up</h1>
+                    <h3>New? Register for an account here:</h3>
+                </div>
+                <br>
+                <div class="input-fields">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email">
+                    <label for="password">Password:</label> <span><i class="bi bi-eye"></i></span>
+                    <input type="password" id="password">
+                    <label for="conf_password">Confirm Password:</label> <span><i class="bi bi-eye"></i></span>
+                    <input type="password" id="conf_password">
+                    <br><br>
+                    <button>Register</button>
+                </div>
+            </div>
+            <hr width="4" size="500%" style="border: none; background-color: var(--dark-green);"/>
+            <div class="login">
+                <div style="flex: 0.2">
+                    <h1>Login</h1>
+                    <h3>Welcome back returning users!</h3>
+                </div>
+                <br>
+                <div class="input-fields">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username">
+                    <label for="password_log">Password:</label>
+                    <input type="password" id="password_log"> <span><i class="bi bi-eye"></i></span>
+                    <p style="padding: 5px;">Forgot password?</p>
+                    <br><br>
+                    <button>Login</button>
+                </div>
+            </div>
+        </div>
+    </body>
