@@ -1,63 +1,21 @@
-from flask import Flask, render_template, url_for, redirect, jsonify, request, g
+from flask import Flask, render_template, url_for, redirect, jsonify, request
+import sqlfunc as sql
 import contextlib
 import io
 from tqdm import tqdm
 import torch
 import numpy as np
-import sqlite3
 import pandas
 import sklearn
 import math
 import random
-import bcrypt
+
 # ok so one problem i have is that you can't import anything within the code editor
 # you have to do it up here
 
 # i love flask so much its not funny.
 
 app = Flask(__name__)
-
-
-
-def get_db():
-    db = sqlite3.connect('conquercode.db')
-    db.row_factory = sqlite3.Row
-    return db
-
-def init_db():
-    conn = get_db()
-
-    conn.execute('''CREATE TABLE IF NOT EXISTS users (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        name TEXT,
-                        email TEXT,
-                        username TEXT NOT NULL,
-                        hashed_password BLOB)''')
-    
-    conn.commit()
-    conn.close()
-
-def add_user(name, email, username, password):
-    conn = get_db()
-    hashable_pw = password.encode('utf-8')
-    hashed_pw = bcrypt.hashpw(hashable_pw, bcrypt.gensalt())
-    conn.execute('''INSERT INTO users (name, email, username, hashed_password) 
-                 VALUES (?, ?, ?, ?)''',
-                 (name, email, username, hashed_pw))
-    conn.commit()
-    print(f"User '{username}' registered successfully.")
-    conn.close()
-
-
-def drop_table():
-    conn = get_db()
-    conn.execute('''DROP TABLE IF EXISTS users;''')
-    conn.commit()
-    conn.close()
-
-
-
-
 
 @app.route("/")
 def home():
@@ -118,9 +76,9 @@ def run_code():
     return response
 
 if __name__ == '__main__':
-    drop_table()
-    init_db()
-    add_user("Kayla Wang", "kw@gmail.com", "1", "1")
+    sql.drop_table()
+    sql.init_db()
+    sql.add_user("Kayla Wang", "k@gmail.com", "1", "1")
     app.run(debug=True, port=4200)
 
 
