@@ -447,6 +447,11 @@ figure {
     flex-direction: column;
 }
 
+.vl {
+  border-left: 4px solid var(--dark-blue);
+  height: 80%;
+}
+
 input {
     width: 100%;
     font-size: 16px;
