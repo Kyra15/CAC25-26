@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 :root {
-    --black: #2d3436;
-    --dark-green: #00b894;
-    --light-gray: #dfe6e9;
-    --dark-gray: #b2bec3;
+    --black: #31333F;
+    --dark-blue: #00b894;
+    --light-blue: #dfe6e9;
+    --gray: #c1cad4;
+    --dark-gray: #6c7681;
     --dark-purple: #6c5ce7;
+    --light-blue: #accff2;
+    --dark-blue: #1c7ec9;
+    --white: #eff3f7;
+    --hover-dark-blue: #1b72b5;
+    --light-teal: #81ecec;
+    --light-orange: #fab1a0;
+    --orange: #e17055;
 }
 
 * {
@@ -17,7 +25,7 @@
 
 body {
     width: 100%;
-    color: #fff;
+    color: var(--white);
     display: flex;
     flex-direction: column;
 }
@@ -36,7 +44,7 @@ h3 {
 }
 
 .code-container {
-    background: var(--dark-green);
+    background: var(--dark-blue);
     text-align: center;
 }
 
@@ -90,7 +98,7 @@ label {
 
 textarea {
     width: 100%;
-    background: var(--light-gray);
+    background: var(--light-blue);
     color: var(--black);
     border: 0px;
     outline: 0px;
@@ -110,7 +118,7 @@ p {
 
 button {
     flex: 0.1;
-    background: var(--dark-green);
+    background: var(--dark-blue);
     color: #fff;
     border: 0px;
     outline: 0px;
@@ -122,7 +130,7 @@ button {
 }
 
 button:hover {
-    background: #03a685;
+    background: var(--hover-dark-blue);
 }
 
 button:active {
@@ -134,7 +142,7 @@ button:active {
     width: 100% !important;
     font-size: 16px;
     color: var(--black);
-    background-color: var(--light-gray);
+    background-color: var(--white);
 }
 
 .tab {
@@ -149,7 +157,7 @@ button:active {
 }
 
 .tab button.active {
-    background-color: var(--light-gray);
+    background-color: var(--light-blue);
 }
 
 .tab button {
@@ -164,7 +172,7 @@ button:active {
 
 .tabcontent {
     display: none;
-    background-color: var(--light-gray);
+    background-color: var(--light-blue);
     color: var(--black);
     padding: 10px 20px;
     font-size: 16px;
@@ -194,7 +202,7 @@ button:active {
 }
 
 .lesson-main {
-    background: var(--black);
+    background: var(--light-blue);
     text-align: start;
     display: flex;
     flex-direction: column;
@@ -214,7 +222,7 @@ button:active {
 
 .lesson-text {
     width: 100%;
-    background: var(--light-gray);
+    background: var(--white);
     color: var(--black);
     border: 0px;
     outline: 0px;
@@ -246,7 +254,7 @@ button:active {
 
 .activity-box label {
     display: flex;
-    background-color: var(--dark-green);
+    background-color: var(--dark-blue);
     padding: 15px;
     width: 100%;
 }
@@ -260,7 +268,7 @@ button:active {
     display: flex;
     flex-direction: row;
     height: 100%;
-    background-color: #b2bec3;
+    background-color: var(--dark-gray);
     position: relative;
     border-radius: 10px;
 }
@@ -269,6 +277,7 @@ button:active {
     height: 100%;
     width: 100%;
     border-bottom-right-radius: 10px;
+    background-color: var(--white)
 }
 
 .mini-editor .left, 
@@ -290,7 +299,7 @@ button:active {
 .hint {
     font-size: 18px;
     color:#2d3436;
-    background-color: #dfe6e9;
+    background-color: var(--light-blue);
     position: absolute;
     z-index: 1;
     width: 10%;
@@ -301,12 +310,16 @@ button:active {
     padding: 6px 6px;
 }
 
+.instructions button{
+    background-color: var(--white);
+}
+
 .instructions button:hover {
-    background-color: #cbd3d6;
+    background-color: var(--gray);
 }
 
 .instructions button.pressed {
-    background-color: #cbd3d6;
+    background-color: var(--gray);
     transform: translateY(3px);
 }
 
@@ -382,19 +395,19 @@ figure {
     height: 1%;
     border-radius: 10px;
     overflow: hidden;
-    background-color: var(--light-gray);
+    background-color: var(--white);
     margin-bottom: 10px
 }
 .progress-fill {
     height: 100%;
-    background: var(--dark-purple);
+    background: var(--light-orange);
     width: 0%;
     transition: width 1s ease;
 }
 
 
 .signin-container {
-    background-color: var(--light-gray);
+    background-color: var(--white);
     display: flex;
     flex-direction: row;
     margin: auto;
@@ -402,7 +415,7 @@ figure {
     width: 50%;
     justify-content: center;
     align-items: center;
-    border: 4px solid var(--dark-green);
+    border: 4px solid var(--dark-blue);
     border-radius: 10px;
 }
 
