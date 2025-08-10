@@ -32,3 +32,4 @@ BUGS:
 
 Bonus:
 - make ui better :( need to get someone to look over it and help me
+- dark mode (for mandi)
