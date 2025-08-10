@@ -8,17 +8,22 @@
         <link rel="stylesheet" 
             href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
         <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
     <body>
 
         <section class="code-container">
+            <button class="back-button" onclick="changePage('signin')">
+                <i class="fa fa-chevron-left"></i>
+                <span style="font-size: 18px; font-weight: 600;">Back</span>
+            </button>
             <h1>Code Editor</h1>
             <h3>Lesson 1: Neural Networks</h3>
             <div class="editor">
                 <div class="left">
                     <textarea id="code"></textarea>
-                    <button type="button" onclick="runCode()">
+                    <button type="button" onclick="runCode()" style="border-top-left-radius: 0; border-top-right-radius: 0">
                         <h4>Run!</h4>
                     </button>
                 </div>
@@ -35,6 +40,7 @@
                         <div class="tab">
                             <button class="tablinks default-open" onclick="openTab(event, 'Task')">Task</button>
                             <button class="tablinks" onclick="openTab(event, 'Docs')">Docs</button>
+                            <button class="tablinks" onclick="openTab(event, 'Notes')">Notes</button>
                         </div>
     
                         <div id="Docs" class="tabcontent">
@@ -53,6 +59,11 @@
                             <label>Objective</label>
                             <p>Do this!</p>
                         </div>
+
+                        <div id="Notes" class="tabcontent">
+                            <label>Notes</label>
+                            <p>Notes notes notes notes notes notes notes notes notes notes notes notes</p>
+                        </div>
         
                         <!-- <button>Hint</button> -->
 
@@ -69,5 +80,6 @@
             integrity="sha512-/mavDpedrvPG/0Grj2Ughxte/fsm42ZmZWWpHz1jCbzd5ECv8CB7PomGtw0NAnhHmE/lkDFkRMupjoohbKNA1Q=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="/static/js/editor.js"></script>
+        <script src="/static/js/script.js"></script>
     </body>
 </html>
