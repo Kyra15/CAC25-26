@@ -61,26 +61,32 @@ function showSection(sec) {
                 });
     bar.style.width = `${(currentSectionIndex / sectionKeys.length) * 100}%`
     currentSectionIndex += 1;
+    Prism.highlightAll()
 }
 
 function codefont(sec) {
-    while (sec["text"].indexOf("*cf*") >= 0) {
-        sec["text"] = sec["text"].replace("*cf*", '<span style="font-family: &#34;Courier New&#34;, monospace;">')
+    if (sec["code"]) {
+        sec["code"].forEach((code, index) => {
+            const codeBlock = `<pre><code class="language-python">${escapeHtml(code)}</code></pre>`;
+            sec["text"] = sec["text"].replace(`{{CODE_BLOCK_${index}}}`, codeBlock);
+        });
     }
 
-    while (sec["text"].indexOf("*/cf*") >= 0) { 
-        sec["text"] = sec["text"].replace("*/cf*", '</span>')
-    }
+    // if (sec["acitivity"]) {
+    //     if (sec["activity_code_blocks"]) {
+    //         sec["activity_code_blocks"].forEach((code, index) => {
+    //             const codeBlock = `<pre><code class="language-python">${escapeHtml(code)}</code></pre>`;
+    //             sec["activity"] = sec["activity"].replace(`{{ACTIVITY_CODE_${index}}}`, codeBlock);
+    //         });
+    //     }
+    // }
+}
 
-    if (sec["activity"]) {
-        while (sec["activity"].indexOf("*cf*") >= 0) {
-            sec["activity"] = sec["activity"].replace("*cf*", '<span style="font-family: &#34;Courier New&#34;, monospace;">')
-        }
 
-        while (sec["activity"].indexOf("*/cf*") >= 0) { 
-            sec["activity"] = sec["activity"].replace("*/cf*", '</span>')
-        }
-    }
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 
@@ -228,9 +234,13 @@ function initCodeMirror() {
             indentUnit: 4,
             matchBrackets: true,
             indentWithTabs: true,
+            theme: "ghcolors",
         });
+        
         editor.setValue("# write your code here\nprint(\"hello world\")")
         output.value = "hello world"
+        editor.getWrapperElement().style.borderTopLeftRadius = "0";
+        editor.getWrapperElement().style.borderTopRightRadius = "0";
 }
 
 function addToOutput(s) {

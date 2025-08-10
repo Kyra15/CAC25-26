@@ -27,6 +27,11 @@ def signin():
 def lesson():
     return render_template('lesson.html')
 
+# @app.route('/lesson/<unit>/<lesson_num>')
+# def lesson(unit, lesson_num):
+#     return render_template('lesson.html', 
+#                          json_path=f'static/json/u{unit}l{lesson_num}.json')
+
 @app.route("/editor")
 def editor():
     return render_template('editor.html')

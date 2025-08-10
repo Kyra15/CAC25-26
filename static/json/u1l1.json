@@ -10,13 +10,14 @@
     },
     "section2": {
         "header": "Assigning variables",
-        "text": "Python will automatically create a variable whenever you first assign a value to it. Assigning is basically giving the variable a value, or putting the water into a bucket. In python, we <u>always</u> have to assign a value to a variable. We do this with the \"=\" sign.*edit*<br>For example:<br>*cf*variable = 'Hello World!'*/cf*<br>*cf*x = 1000*/cf*<br>*cf*pi = 3.14159*/cf*<br><br>In these scenarios, *cf*variable*/cf*, *cf*x*/cf*, and *cf*pi*/cf* are the labels on the buckets and *cf*'Hello World!'*/cf*, *cf*1000*/cf*, and *cf*3.14159*/cf* are the water!",
-        "activity": "Define a variable *cf*my_num*/cf* and set the value of it equal to 8. Then, show that value using the *cf*print()*/cf* command.",
+        "text": "Python will automatically create a variable whenever you first assign a value to it. Assigning is basically giving the variable a value, or putting the water into a bucket. In python, we <u>always</u> have to assign a value to a variable. We do this with the \"=\" sign.*edit*<br>For example:<br>{{CODE_BLOCK_0}}<br>In these scenarios, <code>variable</code>, <code>x</code>, and <code>pi</code> are the labels on the buckets and <code>'Hello World!'</code>, <code>1000</code>, and <code>3.14159</code> are the water!",
+        "code": ["variable = 'Hello World!'\nx = 1000\npi = 3.14159"],
+        "activity": "Define a variable <code>my_num</code> and set the value of it equal to 8. Then, show that value using the <code>print()</code> command.",
         "answer": [["my_num = 8", "print(my_num)"], ["8"]]
     },
     "section3": {
         "header": "Basic data types",
-        "text": "We can assign a variable to hold any of the following <b>data types</b>:<br>Integer: any <b>whole number</b><br>Float: any <b>decimal</b><br>Boolean: either a *cf*True*/cf* or *cf*False*/cf* value<br>String: a <b>series of characters</b>, surrounded by quotations marks (either single or double)*quiz*",
+        "text": "We can assign a variable to hold any of the following <b>data types</b>:<br><br>Integer: any <b>whole number</b>, ex: 8<br>Float: any <b>decimal</b>, ex: 9.8<br>Boolean: either a <code>True</code> or <code>False</code> value<br>String: a <b>series of characters</b>, surrounded by quotations marks (either single or double), ex: 'popcorn12'*quiz*",
         "activity": {
             "Which of these options is a string?": ["9", "hello", "4.8", "'hello'"],
             "Which of these options is a boolean?": ["True", "bool", "&#34;True&#34;", "false"],

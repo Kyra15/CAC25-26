@@ -6,6 +6,12 @@
         <title>Lesson</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.css" />
         <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/css/codecolors.css"/>
+        <link rel="stylesheet" href="/static/css/codemirrorcolors.css"/>
+        <!-- <link rel="stylesheet" href="https://unpkg.com/codemirror-github-light/lib/codemirror-github-light-theme.css"> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
@@ -51,7 +57,7 @@
                             </div>
                         </div>
                         <div class="left">
-                            <textarea readonly="true" id="output"></textarea>
+                            <textarea readonly="true" id="output" style="font-family: courier, monospace;"></textarea>
                         </div>
                     </div>
 

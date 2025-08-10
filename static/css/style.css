@@ -148,6 +148,10 @@ button:active {
     padding: 5px;
 }
 
+.CodeMirror * {
+    font-family: courier, monospace !important;
+}
+
 .tab {
     overflow: hidden;
     background-color: transparent;
@@ -484,3 +488,12 @@ input {
     background-color: var(--hover-dark-blue);
     transform: translateY(0px);
 }
+
+
+code {
+  border-radius: 3px;
+  font-family: courier, monospace;
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
