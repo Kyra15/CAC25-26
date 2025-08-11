@@ -46,7 +46,7 @@ function showSection(sec) {
     findImage(sec, newSec)
     findEdit(sec)
     findQuiz(sec)
-    textSec.innerHTML = sec["text"];
+    textSec.innerHTML = sec["text"] + "<br><br>";
 
     const nextBtn = document.getElementById("btn-span");
     const btnBrk = document.getElementById("btn-break")
@@ -71,17 +71,7 @@ function codefont(sec) {
             sec["text"] = sec["text"].replace(`{{CODE_BLOCK_${index}}}`, codeBlock);
         });
     }
-
-    // if (sec["acitivity"]) {
-    //     if (sec["activity_code_blocks"]) {
-    //         sec["activity_code_blocks"].forEach((code, index) => {
-    //             const codeBlock = `<pre><code class="language-python">${escapeHtml(code)}</code></pre>`;
-    //             sec["activity"] = sec["activity"].replace(`{{ACTIVITY_CODE_${index}}}`, codeBlock);
-    //         });
-    //     }
-    // }
 }
-
 
 function escapeHtml(text) {
     const div = document.createElement('div');
@@ -111,35 +101,71 @@ function findImage(sec, new_sec) {
 function findQuiz(sec) {
     while (sec["text"].indexOf("*quiz*") >= 0) {
         sec["text"] = sec["text"].replace("*quiz*", "<br>")
-        toggleQuiz();
+        setTimeout(() => {
+            toggleQuiz();
+        }, 600);
     }
 }
 
 function toggleQuiz() {
+    console.log("toggle quiz")
     const act_box = document.getElementsByClassName("activity-box")[0]
     const quiz_q = document.getElementsByClassName("quiz-question")[0]
     const quiz = document.getElementsByClassName("quiz")[0]
     const next_btn = document.getElementById("btn-span")
 
-    if ("hidden" in act_box.classList) {
-        act_box.classList.remove("hidden")
-        quiz_q.classList.remove("hidden")
-        quiz.classList.remove("hidden")
-        next_btn.classList.add("hidden")
+    if (act_box.classList.contains("hidden")) {
+
+        act_box.classList.remove("hidden");
+        quiz_q.classList.remove("hidden");
+        quiz.classList.remove("hidden");
+        
+        act_box.style.height = "0px";
+        act_box.style.overflow = "hidden";
+        
+        const targetHeight = "40vh";
+        
+        act_box.offsetHeight;
+        act_box.style.height = targetHeight;
+        
+        next_btn.classList.add("hidden");
+
+        document.getElementById("directions").innerHTML = json_data[`section${currentSectionIndex - 1}`]["activity"]
+        
+        setTimeout(() => {
+            const lessonText = document.querySelector('.lesson-text');
+            lessonText.scrollTo({
+                top: lessonText.scrollHeight,
+                behavior: 'smooth'
+            });
+            act_box.style.overflow = "visible";
+        }, 300);
+        
     } else {
-        act_box.classList.add("hidden")
-        quiz_q.classList.add("hidden")
-        quiz.classList.add("hidden")
-        next_btn.classList.remove("hidden")
+        act_box.style.height = act_box.offsetHeight + "px";
+        act_box.style.overflow = "hidden";
+
+        act_box.offsetHeight;
+        act_box.style.height = "0px";
+        
+        next_btn.classList.remove("hidden");
+        
+        setTimeout(() => {
+            act_box.classList.add("hidden");
+            quiz_q.classList.add("hidden");
+            quiz.classList.add("hidden");
+            act_box.style.overflow = "";
+        }, 300);
     }
-   
 }
 
 
 function findEdit(sec) {
     while (sec["text"].indexOf("*edit*") >= 0) {
         sec["text"] = sec["text"].replace("*edit*", "<br>")
-        toggleEditor();
+        setTimeout(() => {
+            toggleEditor();
+        }, 600);
     }
 }
 
@@ -166,7 +192,7 @@ function toggleEditor() {
         
         next_btn.classList.add("hidden");
 
-        document.getElementById("directions").innerHTML = json_data[`section${currentSectionIndex}`]["activity"]
+        document.getElementById("directions").innerHTML = json_data[`section${currentSectionIndex - 1}`]["activity"]
         
         setTimeout(() => {
             const lessonText = document.querySelector('.lesson-text');
@@ -338,6 +364,6 @@ function checkAnswerCode() {
 
 
 function incorrect() {
-    pass
+    console.log("wrong")
 }
 

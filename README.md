@@ -7,11 +7,12 @@ Done:
 - JSON loading for editor
 - page layout for signins
 - page navigation (back buttons)
+- login + signup
 
 
 In progress:
-- login + signup (need to connect to sql table use code from poverello)
 - page layout + js for home (figured out layout at least)
+- signup second page
 - grading system (quiz and ~~editor~~) quiz is easy will do tmrw
 - JSON loading for quiz
 - script for unit 1 + 2
