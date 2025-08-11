@@ -1,8 +1,9 @@
-from flask import Flask, render_template, url_for, redirect, jsonify, request
+from flask import Flask, render_template, url_for, redirect, jsonify, request, g, flash
 import sqlfunc as sql
+import sqlite3
+import bcrypt
 import contextlib
 import io
-from tqdm import tqdm
 import torch
 import numpy as np
 import pandas
@@ -16,6 +17,68 @@ import random
 # i love flask so much its not funny.
 
 app = Flask(__name__)
+
+app.secret_key = 'conquercode-blah-blah-1234'
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect('conquercode.db')
+        db.row_factory = sqlite3.Row
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+
+
+def init_db():
+    with app.app_context():
+        conn = get_db()
+        conn.execute('''CREATE TABLE IF NOT EXISTS users (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            name TEXT,
+                            email TEXT,
+                            username TEXT NOT NULL,
+                            hashed_password BLOB)''')
+        conn.commit()
+
+def add_user(name, email, username, password):
+    with app.app_context():
+        conn = get_db()
+        hashable_pw = password.encode()
+        hashed_pw = bcrypt.hashpw(hashable_pw, bcrypt.gensalt())
+        conn.execute('''INSERT INTO users (name, email, username, hashed_password) 
+                     VALUES (?, ?, ?, ?)''',
+                     (name, email, username, hashed_pw))
+        conn.commit()
+        print(f"user {username} registered successfully.")
+
+
+# def verify_user(user, pw):
+#     with app.app_context():
+#         conn = get_db()
+#         db_pw = conn.execute('''SELECT * FROM users
+#                         WHERE username = ?''', user)
+#         if bcrypt.check_password_hash(db_pw, pw):
+#             print("right password!") 
+#         else:
+#             print("wrong password")
+
+
+def drop_table():
+    with app.app_context():
+        conn = get_db()
+        conn.execute('''DROP TABLE IF EXISTS users;''')
+        conn.commit()
+        conn.close()
+
+
+
+
 
 @app.route("/")
 def home():
@@ -75,10 +138,67 @@ def run_code():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
+
+@app.route('/users_testbank', methods=['GET'])
+def get_users():
+    conn = get_db()
+    users = conn.execute('SELECT * FROM users').fetchall()
+
+    user_list = [dict(user) for user in users]
+
+    return jsonify(user_list)
+
+
+@app.route('/sign_up_data', methods=['POST'])
+def su_handle_data():
+    email = request.form['email']
+    password = request.form['password']
+    conf_password = request.form['conf_password']
+
+    conn = get_db()
+    cur = conn.execute('''SELECT * FROM users
+                       WHERE email = ?''', (email,))
+
+    if cur:
+        flash("An account with this email already exists. Login instead of signing up!", "signup")
+        return redirect(url_for("signin"), code=302) 
+    if password == conf_password:
+        flash("Account made successfully!", "signup")
+        return redirect(url_for("lesson"), code=302) 
+    else:
+        flash("Passwords do not match. Check for typos!", "signup")
+        return redirect(url_for("signin"), code=302) 
+
+@app.route('/login_data', methods=['POST'])
+def lg_handle_data():
+    user = request.form['username']
+    pw = request.form['password_log'].encode()
+
+    conn = get_db()
+    cur = conn.execute('''SELECT * FROM users
+                 WHERE username = ?''', (user,))
+    
+    db_user = cur.fetchone()
+    
+    if db_user:
+        db_pw = db_user["hashed_password"]
+        if bcrypt.checkpw(pw, db_pw):
+            flash("Logged in successfully!", "login")
+            return redirect(url_for("lesson"), code=302)
+        else:
+            flash("Wrong password. Try again!", "login")
+            return redirect(url_for("signin"), code=302)
+    else:
+        flash("User not found. Sign up!", "login")
+        return redirect(url_for("signin"), code=302)
+    
+
+
+drop_table()
+init_db()
+add_user("Kayla Wang", "k@gmail.com", "1", "1")
+
 if __name__ == '__main__':
-    sql.drop_table()
-    sql.init_db()
-    sql.add_user("Kayla Wang", "k@gmail.com", "1", "1")
     app.run(debug=True, port=4200)
 
 

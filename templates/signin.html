@@ -7,6 +7,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.css" />
         <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
         <link rel="stylesheet" href="/static/css/style.css">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
     </head>
     <body style="background-color: var(--light-blue)">
         <div class="signin-container">
@@ -17,16 +20,26 @@
                     <h3>New? Register for an account:</h3>
                 </div>
                 <br>
-                <div class="input-fields">
+                <form action="{{ url_for('su_handle_data') }}" method="post" class="input-fields">
                     <label for="email">Email:</label>
-                    <input type="email" id="email">
+                    <input type="email" name="email">
                     <label for="password">Password:</label> <span><i class="bi bi-eye"></i></span>
-                    <input type="password" id="password">
+                    <input type="password" name="password">
                     <label for="conf_password">Confirm Password:</label> <span><i class="bi bi-eye"></i></span>
-                    <input type="password" id="conf_password">
-                    <br><br>
-                    <button>Register</button>
-                </div>
+                    <input type="password" name="conf_password">
+                    <br>
+                    <div class="error-message" id="error-message-su">
+                        {% with messages = get_flashed_messages(category_filter=["signup"]) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {{ message }}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <br>
+                    <button type="submit" name="register">Register</button>
+                </form>
             </div>
             <div class="vl"></div>
             <div class="login">
@@ -35,16 +48,27 @@
                     <h3>Welcome back returning users!</h3>
                 </div>
                 <br>
-                <div class="input-fields">
+                <form action="{{ url_for('lg_handle_data') }}" method="post" class="input-fields">
                     <label for="username">Username:</label>
-                    <input type="text" id="username">
+                    <input type="text" name="username">
                     <label for="password_log">Password:</label>
-                    <input type="password" id="password_log"> <span><i class="bi bi-eye"></i></span>
-                    <br><br>
-                    <button>Login</button>
-                </div>
+                    <input type="password" name="password_log"> <span><i class="bi bi-eye"></i></span>
+                    <div class="error-message" id="error-message-lg">
+                        {% with messages = get_flashed_messages(category_filter=["login"]) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {{ message }}
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <br>
+                    <button type="submit" name="login">Login</button>
+                </form>
+                
             </div>
         </div>
+        <script src="/static/js/signin.js"></script>
         <script src="/static/js/script.js"></script>
     </body>
 </html>

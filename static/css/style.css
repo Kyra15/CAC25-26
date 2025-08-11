@@ -465,6 +465,11 @@ input {
     padding: 5px;
 }
 
+input:focus {
+    border: 2px solid var(--dark-blue);
+    outline: 0;
+}
+
 .input-fields {
     flex: 0.7;
     display: flex;
@@ -497,3 +502,12 @@ code {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+
+.error-message {
+    color: var(--orange);
+    /* background-color: var(--light-orange); */
+    /* border: 2px solid var(--orange); */
+    border-radius: 5px;
+    height: 10%;
+    align-items: center;
+}
