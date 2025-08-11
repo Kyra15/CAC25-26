@@ -119,6 +119,7 @@ function toggleQuiz() {
         act_box.classList.remove("hidden");
         quiz_q.classList.remove("hidden");
         quiz.classList.remove("hidden");
+        next_btn.classList.add("hidden");
         
         act_box.style.height = "0px";
         act_box.style.overflow = "hidden";
@@ -127,10 +128,16 @@ function toggleQuiz() {
         
         act_box.offsetHeight;
         act_box.style.height = targetHeight;
-        
-        next_btn.classList.add("hidden");
 
-        document.getElementById("directions").innerHTML = json_data[`section${currentSectionIndex - 1}`]["activity"]
+        const questions = json_data[`section${currentSectionIndex - 1}`]["activity"]
+
+        console.log(questions)
+        for (const q of Object.keys(questions)) {
+            console.log(q)
+            let answers = questions[q];
+            showQuestion(q, answers);
+            break;
+        }
         
         setTimeout(() => {
             const lessonText = document.querySelector('.lesson-text');
@@ -159,6 +166,13 @@ function toggleQuiz() {
     }
 }
 
+
+function showQuestion(question, answers) {
+    document.getElementById("directions_quiz").innerHTML = question
+    for (let i = 0; i < answers.length; i++) {
+        document.querySelectorAll(".quiz button")[i].innerHTML = answers[i]
+    }
+}
 
 function findEdit(sec) {
     while (sec["text"].indexOf("*edit*") >= 0) {
@@ -189,10 +203,10 @@ function toggleEditor() {
         
         act_box.offsetHeight;
         act_box.style.height = targetHeight;
-        
+
         next_btn.classList.add("hidden");
 
-        document.getElementById("directions").innerHTML = json_data[`section${currentSectionIndex - 1}`]["activity"]
+        document.getElementById("directions_edit").innerHTML = json_data[`section${currentSectionIndex - 1}`]["activity"]
         
         setTimeout(() => {
             const lessonText = document.querySelector('.lesson-text');

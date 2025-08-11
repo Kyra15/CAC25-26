@@ -271,7 +271,8 @@ button:active {
     width: 100%;
 }
 
-#directions {
+#directions_edit,
+#directions_quiz  {
     padding-left: 1rem;
     border-radius: 10px
 }

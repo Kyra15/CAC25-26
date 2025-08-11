@@ -34,3 +34,4 @@ BUGS:
 Bonus:
 - make ui better :( need to get someone to look over it and help me
 - dark mode (for mandi)
+- smooth out some of the transitions (timing issures)
