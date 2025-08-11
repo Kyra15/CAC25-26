@@ -8,13 +8,13 @@ Done:
 - page layout for signins
 - page navigation (back buttons)
 - login + signup
+- JSON loading for quiz
 
 
 In progress:
 - page layout + js for home (figured out layout at least)
 - signup second page
 - grading system (quiz and ~~editor~~) quiz is easy will do tmrw
-- JSON loading for quiz
 - script for unit 1 + 2
 
 

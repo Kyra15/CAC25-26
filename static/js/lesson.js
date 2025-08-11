@@ -4,6 +4,7 @@ var json_path = "static/json/u1l1.json"
 let json_data = null;
 let currentSectionIndex = 1;
 let img_ind = 0;
+let qind = 0;
 
 async function fetchJSON(path) {
     try {
@@ -131,13 +132,11 @@ function toggleQuiz() {
 
         const questions = json_data[`section${currentSectionIndex - 1}`]["activity"]
 
-        console.log(questions)
-        for (const q of Object.keys(questions)) {
-            console.log(q)
-            let answers = questions[q];
-            showQuestion(q, answers);
-            break;
-        }
+        qind = 0
+
+        const q_keys = Object.keys(questions);
+        showQuestion(q_keys[qind], questions[q_keys[qind]]);
+
         
         setTimeout(() => {
             const lessonText = document.querySelector('.lesson-text');
@@ -167,12 +166,80 @@ function toggleQuiz() {
 }
 
 
-function showQuestion(question, answers) {
+function showQuestion(question, options) {
     document.getElementById("directions_quiz").innerHTML = question
-    for (let i = 0; i < answers.length; i++) {
-        document.querySelectorAll(".quiz button")[i].innerHTML = answers[i]
+    for (let i = 0; i < options.length; i++) {
+        document.querySelectorAll(".quiz button")[i].innerHTML = `<span class="front">${options[i]}</span>
+                                                                 <span class="back">ans</span>`
     }
 }
+
+function checkAnswerQuiz(ind) {
+    const qlst = Object.keys(json_data[`section${currentSectionIndex - 1}`]["activity"])
+    console.log(qind)
+    const answers = json_data[`section${currentSectionIndex - 1}`]["answer"]
+
+    if (ind == answers[qind][0]) {
+        correct()
+    } else {
+        incorrect()
+    }
+
+    quizShowAns(answers[qind], ind)
+
+    if (qind == qlst.length) {
+        setTimeout(() => {
+            toggleQuiz()
+            nextSection()
+        }, 6000);
+    }
+}
+
+function quizShowAns(answer, clicked_ind) {
+    qind += 1;
+    // make all buttons disappear except for that one 
+    // then let it go onto the next question by doing show question
+
+    const buttons = document.querySelectorAll(".buttons button") 
+
+    let ans_ind = answer[0]
+    
+    let ans_button = buttons[ans_ind]
+
+    for (const q of buttons) {
+        q.style.visibility = "hidden"
+    }
+
+    ans_button.style.visibility = "visible"
+
+    let back = ans_button.children[1]
+    back.innerHTML = answer[1]
+
+    buttons[clicked_ind].style.visibility = "visible"
+
+    setTimeout(() => {
+        ans_button.classList.add('flipped');
+    }, 1000);
+
+    setTimeout(() => {
+        const questions = json_data[`section${currentSectionIndex - 1}`]["activity"];
+        const q_keys = Object.keys(questions);
+        
+        if (qind < q_keys.length) {
+            const next_q = q_keys[qind];
+            const next_ops = questions[next_q];
+            
+            for (const btn of buttons) {
+                btn.style.visibility = "visible";
+                btn.classList.remove('flipped');
+            }
+            
+            showQuestion(next_q, next_ops);
+        }
+    }, 5000);
+
+}
+
 
 function findEdit(sec) {
     while (sec["text"].indexOf("*edit*") >= 0) {
@@ -254,8 +321,6 @@ async function loadDataHTML() {
 
 loadDataHTML()
 
-// next section button
-// show section and next section functions
 
 let output = null
 let editor = null
@@ -369,6 +434,7 @@ function checkAnswerCode() {
     }
 
     if (is_correct) {
+        correct()
         toggleEditor()
         nextSection()
     } else {
@@ -376,6 +442,10 @@ function checkAnswerCode() {
     }
 }
 
+
+function correct() {
+    console.log("correct!!")
+}
 
 function incorrect() {
     console.log("wrong")

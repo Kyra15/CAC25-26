@@ -24,7 +24,7 @@
             "Which of these options is an integer?": ["87.0", "'16'", "2", "5.4"],
             "Which of these options is a float?": ["&#34;3.2&#34;", "'4'", "390", "100000.1"]
         },
-        "answer": [["3", "Strings need quotation marks!"], ["0", "Booleans are true or falses capitalized (without quotes)"], ["2", "Integers are whole numbers (without quotes)"], ["3", "Floats are decimals (without quotes)"]]
+        "answer": [["3", "Strings need quotation marks!"], ["0", "Booleans are either True or False (without quotes and capitalized)"], ["2", "Integers are whole numbers (without quotes)"], ["3", "Floats are decimals (without quotes)"]]
     },
     "end": "Now you know the basics of Python's data system! Continue to the next lesson to learn how to use these variables."
 }
