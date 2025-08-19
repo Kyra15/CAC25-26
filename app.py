@@ -82,20 +82,20 @@ def drop_table():
 
 @app.route("/")
 def home():
-    return redirect(url_for("signin"), code=302)
+    return render_template('home.html')
 
 @app.route("/signin")
 def signin():
     return render_template('signin.html')
 
-@app.route("/lesson")
-def lesson():
-    return render_template('lesson.html')
+# @app.route("/lesson")
+# def lesson():
+#     return render_template('lesson.html')
 
-# @app.route('/lesson/<unit>/<lesson_num>')
-# def lesson(unit, lesson_num):
-#     return render_template('lesson.html', 
-#                          json_path=f'static/json/u{unit}l{lesson_num}.json')
+@app.route('/u<unit>l<lesson_num>')
+def lesson(unit, lesson_num):
+    return render_template('lesson.html', 
+                         json_path=f'static/json/u{unit}l{lesson_num}.json')
 
 @app.route("/editor")
 def editor():

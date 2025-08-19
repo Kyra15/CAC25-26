@@ -1,5 +1,4 @@
 // loading in the lesson text
-var json_path = "static/json/u1l1.json"
 
 let json_data = null;
 let currentSectionIndex = 1;
@@ -444,7 +443,10 @@ function checkAnswerCode() {
 
 
 function correct() {
-    console.log("correct!!")
+    // do animation
+    setTimeout(() => {
+        return
+    }, 300);
 }
 
 function incorrect() {

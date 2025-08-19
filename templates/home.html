@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html Lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.css" />
+        <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+    <body style="background-color: var(--light-blue)">
+        <div class="home-container">
+            <div class="topbar">
+                <div class="pebbles">
+                    <img src="static/images/pebble.png" width="64" height="64">
+                    <span>100</span>
+                </div>
+                <div class="profile">
+                    <span>Username</span>
+                    <img src="static/images/pfp_temp.jpg">
+                </div>
+            </div>
+            <br>
+            <div class="unit">
+                <button class="unit-header collapsible">
+                    <i class="fa fa-flag flag" aria-hidden="true"></i>
+                    <h2 class="unit-name">Unit 1: Intro to Python</h2>
+                    <i class="fa fa-chevron-down arrow"></i>
+                </button>
+                <div class="unit-container content">
+                    <button onclick="changePage('u1l1')">Lesson 1</button>
+                    <button onclick="changePage('u1l2')">Lesson 2</button>
+                    <button onclick="changePage('u1l3')">Lesson 3</button>
+                    <button onclick="changePage('u1l4')">Lesson 4</button>
+                    <button onclick="changePage('u1l5')">Lesson 5</button>
+                    <button class="project">Project: Storefront</button>
+                </div>
+            </div>
+            <br><br>
+            <div class="unit">
+                <button class="unit-header collapsible">
+                    <i class="fa fa-flag flag" aria-hidden="true"></i>
+                    <h2 class="unit-name">Unit 2: Object Oriented Programming</h2>
+                    <i class="fa fa-chevron-down arrow"></i>
+                </button>
+                <div class="unit-container content">
+                    <button onclick="changePage('u2l1')">Lesson 1</button>
+                    <button onclick="changePage('u2l2')">Lesson 2</button>
+                    <button onclick="changePage('u1l3')">Lesson 3</button>
+                    <button onclick="changePage('u1l4')">Lesson 4</button>
+                    <button onclick="changePage('u1l5')">Lesson 5</button>
+                    <button class="project">Project: Pets</button>
+                </div>
+            </div>
+            <br><br>
+
+            <div class="unit">
+                <button class="unit-header collapsible">
+                    <i class="fa fa-flag flag" aria-hidden="true"></i>
+                    <h2 class="unit-name">Unit 3: Intro to Machine Learning</h2>
+                    <i class="fa fa-chevron-down arrow"></i>
+                </button>
+                <div class="unit-container content">
+                    <button onclick="changePage('u3l1')">Lesson 1</button>
+                    <button onclick="changePage('u3l2')">Lesson 2</button>
+                    <button onclick="changePage('u3l3')">Lesson 3</button>
+                    <button onclick="changePage('u3l4')">Lesson 4</button>
+                    <button onclick="changePage('u3l5')">Lesson 5</button>
+                    <button class="project">Project: Model Building</button>
+                </div>
+            </div>
+            <br><br>
+
+            <div class="unit">
+                <button class="unit-header collapsible">
+                    <i class="fa fa-flag flag" aria-hidden="true"></i>
+                    <h2 class="unit-name">Unit 4: Linear Regression</h2>
+                    <i class="fa fa-chevron-down arrow"></i>
+                </button>
+                <div class="unit-container content">
+                    <button onclick="changePage('u4l1')">Lesson 1</button>
+                    <button onclick="changePage('u4l2')">Lesson 2</button>
+                    <button onclick="changePage('u4l3')">Lesson 3</button>
+                    <button onclick="changePage('u4l4')">Lesson 4</button>
+                    <button onclick="changePage('u4l5')">Lesson 5</button>
+                    <button class="project">Project: Planet Predictor</button>
+                </div>
+            </div>
+            <br><br>
+        </div>
+        <script src="static/js/home.js"></script>
+        <script src="static/js/script.js"></script>
+    </body>
+</html>

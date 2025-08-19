@@ -17,12 +17,12 @@
     </head>
     <body>
         <section class="code-container">
-            <button class="back-button" onclick="changePage('signin')">
+            <button class="back-button" onclick="changePage('/')">
                 <i class="fa fa-chevron-left"></i>
                 <span style="font-size: 18px; font-weight: 600;">Back</span>
             </button>
-            <h1 id="lesson-title">Poop</h1>
-            <h3 id="unit-title">Poop</h3>
+            <h1 id="lesson-title">Loading...</h1>
+            <h3 id="unit-title">Loading...</h3>
             <div class="progress-container">
                 <div id="lesson-progressbar" class="progress-fill"></div>
             </div>
@@ -44,7 +44,7 @@
                     <div class="instructions hidden">
                         <button onclick="giveHint()" id="hint" class="hint">Hint</button>
                         <label style="border-top-right-radius: 10px; border-top-left-radius: 10px; padding-right: 5px;"><b>Try it!</b>
-                            <span id="directions_edit">Nothing</span>
+                            <span id="directions_edit">Loading...</span>
                         </label> 
                     </div>
                     <div class="mini-editor hidden">
@@ -64,7 +64,7 @@
 
                     <div class="quiz-question hidden">
                         <label style="display: inline-block; border-top-left-radius: 10px; border-top-right-radius: 10px;"><b>Try it!</b>
-                            <span id="directions_quiz">dfghjukelrgthyj</span>
+                            <span id="directions_quiz">Loading...</span>
                         </label> 
                     </div>
                     <div class="quiz hidden">
@@ -86,6 +86,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/mode/python/python.min.js"
             integrity="sha512-/mavDpedrvPG/0Grj2Ughxte/fsm42ZmZWWpHz1jCbzd5ECv8CB7PomGtw0NAnhHmE/lkDFkRMupjoohbKNA1Q=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+        <script type="text/javascript">
+            var json_path = "{{ json_path }}";
+        </script>
         <script src="/static/js/lesson.js"></script>
         <script src="/static/js/script.js"></script>
     </body>

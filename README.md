@@ -9,17 +9,17 @@ Done:
 - page navigation (back buttons)
 - login + signup
 - JSON loading for quiz
+- grading system (quiz and editor)
 
 
 In progress:
 - page layout + js for home (figured out layout at least)
 - signup second page
-- grading system (quiz and ~~editor~~) quiz is easy will do tmrw
 - script for unit 1 + 2
+- point system (correct animations)
 
 
 To do:
-- point system
 - figure out how to load json but like not from the js file
 - data security (protect scripts and users)
 - script for unit 3 at least and do a project for 4/5/6 to show its possible
