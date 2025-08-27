@@ -103,7 +103,10 @@ def editor():
 
 # erm
 @app.route('/run', methods=['POST'])
-def run_code():
+def run_code(params=None):
+
+    global_vars = params
+
     # basically get from js and store in computer mem
     code = request.json.get('code', '')
     stdout = io.StringIO()
@@ -128,7 +131,7 @@ def run_code():
     # then execute the code within and also have pytorch and then show error if u get one
     try:
         with contextlib.redirect_stdout(stdout):
-            exec(code, {"__builtins__": safe_builtins, "torch": torch})
+            exec(code, {"__builtins__": safe_builtins, "torch": torch}, global_vars)
         output = stdout.getvalue()
     except Exception as e:
         output = str(e)

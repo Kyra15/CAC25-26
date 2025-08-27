@@ -1,0 +1,51 @@
+{
+    "title": "Lesson 2: Operations and Conditionals",
+    "unit": "Unit 1: Intro to Python",
+    "abstract": "This lesson covers operators and conditionals, which allow us to make decisions in Python programs. By the end, you’ll know how to use math symbols, logic operators, and conditional statements like if, else, and elif.",
+    "section1": {
+        "header": "What are conditionals?",
+        "text": "In python, we make decisions based on if things are right or wrong. To evaluate this, we use statements called <u>conditionals</u>.<br>If we compare this to math, think of the equation 1 + 1 = 2. The entire equation would be the conditional, and the plus sign would be the other part of this, the <u>operator</u>."
+    },
+    "section2": {
+        "header": "Math symbols",
+        "text": "We use symbols in Python the same way we use them in math, except they aren’t statements. They return true or false values.<br><br>A < B: check if A is less than B<br>A > B: check if A is greater than B<br><br>To check if something is equal to something else, we have to use “==” since “=” is for assigning variables.<br>A == B: check if A is equal to B<br><br>To check if something is NOT equal to something else, we use an exclamation mark and equals.<br>A != B: check if A is not equal to B<br><br>This exclamation mark indicates the word “not,” which leads us to our next section…"
+    },
+    "section3": {
+        "header": "Logic operators",
+        "text": "Python uses words like “and,” “not,” and “or” to symbolize logic expressions.<br>Logic expressions are similar to math operators in Python in that they also compare two objects, but they have outputs based on specific rules.<br><br>A and B: A and B both must be true<br>A or B: at least one of A and B has to be true<br>not A: take the opposite value",
+        "activity": {
+            "Which of these is not a logic operator?": ["And", "Not", "But", "Or"],
+            "Given A and B are booleans, what would an <code>or</code> mean?": ["Both A and B must be true", "A or B but not both must be true", "Both A and B must be false", "At least one of A and B has to be true"],
+            "How do we check if something is equal to another thing?": ["==", "=", "!=", "equals()"],
+            "Which of these produces a <code>True</code> result?": ["5 == “5”", "32 / 4 == 8", "90 + 2 > 100", "45 != 45"]
+        },
+        "answer": [
+            ["2", "And, Or, and Not are the logic operators Python has"],
+            ["3", "‘or’ means at least A or B is true"],
+            ["0", "We use == to check for equality"],
+            ["1", "32 / 4 equals 8, so that is True"]
+        ]
+    },
+    "section4": {
+        "header": "If statement",
+        "text": "If statements are where we use these math symbols and logic operators.<br>The formatting is:<br><br>{{CODE_BLOCK_0}}<br><br>It acts like an “If….then” statement in english. If the condition is true, then execute the code.<br><br>The claim is where we would put our logic statement.<br><br>For example:<br>{{CODE_BLOCK_1}}<br>A is false, but B is true. If we use the “or” rule from earlier, we can see that the code would run, since at least one of the two is True.*edit*",
+        "code": ["if claim:\n    # write code", "A = False\nB = True\nif A or B:\n    print(\"yay\")"],
+        "activity": "Write code that prints 'hello' if x > 5.",
+        "answer": [["if", "print(\"hello\")"], ["hello", ""], [{"x": "6"}, {"x": "4"}]]
+    },
+    "section5": {
+        "header": "Else",
+        "text": "We can also add something to the end of the if statement called an else statement. This basically says if the claim is NOT true, then complete some other code.<br><br>For example:<br>{{CODE_BLOCK_0}}<br>If claim is false, “else” is printed. If claim is true, “if” is printed.<br><br>This full block of code is in the form of something we call an “if-else” statement.*edit*",
+        "code": ["if claim:\n    print(\"if\")\nelse:\n    print(\"else\")"],
+        "activity": "Write code that prints 'hello' if x > 5 and then 'bye' if not.",
+        "answer": [["if", "print(\"hello\")", "else", "print(\"bye\")"], ["hello", "bye"], [{"x": "6"}, {"x": "4"}]]
+    },
+    "section6": {
+        "header": "Elif",
+        "text": "The final type of statement we can have is an elif (short for else-if). This acts as both an else and an if. The structure is always if-elif-else, however you can have as many elifs as you want. Elifs will execute if the first condition (the one in the if statement) is not true AND another condition that’s provided within the elif is met.<br><br>For example:<br>{{CODE_BLOCK_0}}<br>If claim is not true, but claim 2 is, then the program prints elif1. If claim and claim 2 are both not true but claim 3 is, then the program prints elif2. Finally if none of the claims are true, then it prints else.*edit*",
+        "code": ["if claim:\n    print(\"if\")\nelif claim2:\n    print(\"elif1\")\nelif claim3:\n    print(\"elif2\")\nelse:\n    print(\"else\")"],
+        "activity": "Write a grading system. If the grade (any number) is greater than 90, print 'A'. If it’s greater than 80 but less than 90, print 'B'. Anything below that should print 'C'.",
+        "answer": [["if", "elif", "else"], ["A", "B", "C"], [{"grade": "95"}, {"grade": "85"}, {"grade": "65"}]]
+    },
+    "end": "Great job! Continue to the next section to see how we store large chunks of data."
+}

@@ -257,6 +257,7 @@ function toggleEditor() {
     const next_btn = document.getElementById("btn-span");
     
     if (act_box.classList.contains("hidden")) {
+        console.log("editor shown")
 
         act_box.classList.remove("hidden");
         instruct.classList.remove("hidden");
@@ -286,6 +287,7 @@ function toggleEditor() {
         }, 300);
         
     } else {
+        console.log("editor hidden")
         act_box.style.height = act_box.offsetHeight + "px";
         act_box.style.overflow = "hidden";
 
@@ -325,6 +327,10 @@ let output = null
 let editor = null
 
 function initCodeMirror() {
+    if (editor) {
+        editor.toTextArea();
+        editor = null;
+    }
     // code for the editor activity box
     output = document.getElementById("output");
 
@@ -402,19 +408,19 @@ function giveHint() {
 }
 
 
-function checkAnswerCode() {
+async function checkAnswerCode() {
     sec = json_data[`section${currentSectionIndex - 1}`]
-    // basically check if the code has the output we want and that the output has the number we want
+
+    // check if input has what we want
+    // then check if the output gives us the write stuff if WE input stuff
 
     input = editor.getValue()
-    output = document.getElementById("output").value
-
-    console.log("hi", input, output)
 
     let is_correct = true
 
     let input_ans = sec["answer"][0]
     let output_ans = sec["answer"][1]
+    let test_vals = sec["answer"][2]
 
     for (let i = 0; i < input_ans.length; i++) {
         console.log(input_ans[i])
@@ -424,11 +430,37 @@ function checkAnswerCode() {
         }
     }
 
-    for (let j = 0; j < output_ans.length; j++) {
-        console.log(output_ans[j])
-        if (!output.includes(output_ans[j])) {
-            console.log("output wrong")
-            is_correct = false
+    for (let t = 0; t < test_vals.length; t++) {
+
+        let assignments = "";
+        console.log(test_vals[t])
+
+        for (let [varName, value] of Object.entries(test_vals[t])) {
+
+            new_input = input.replace(varName, `USERINPUT${t}`)
+
+            if (typeof test_vals[t] === "string") {
+                value = JSON.stringify(value)
+            }
+
+            assignments += `${varName} = ${value}\n`;
+            console.log(varName, value)
+        }
+
+        let wrapped_code = assignments + new_input;
+
+        let res = await fetch("http://127.0.0.1:4200/run", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code: wrapped_code }),
+        });
+        let data = await res.json();
+
+        let output = data.output.trim();
+
+        if (output != output_ans[t]) {
+            console.log(`Test ${t} failed: expected '${output_ans[t]}' got '${output}'`);
+            is_correct = false;
         }
     }
 

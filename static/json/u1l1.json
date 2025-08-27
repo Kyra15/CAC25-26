@@ -13,7 +13,7 @@
         "text": "Python will automatically create a variable whenever you first assign a value to it. Assigning is basically giving the variable a value, or putting the water into a bucket. In python, we <u>always</u> have to assign a value to a variable. We do this with the \"=\" sign.*edit*<br>For example:<br>{{CODE_BLOCK_0}}<br>In these scenarios, <code>variable</code>, <code>x</code>, and <code>pi</code> are the labels on the buckets and <code>'Hello World!'</code>, <code>1000</code>, and <code>3.14159</code> are the water!",
         "code": ["variable = 'Hello World!'\nx = 1000\npi = 3.14159"],
         "activity": "Define a variable <code>my_num</code> and set the value of it equal to 8. Then, show that value using the <code>print()</code> command.",
-        "answer": [["my_num = 8", "print(my_num)"], ["8"]]
+        "answer": [["my_num = 8", "print(my_num)"], ["8"], {}]
     },
     "section3": {
         "header": "Basic data types",
