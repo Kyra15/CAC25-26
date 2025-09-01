@@ -308,7 +308,19 @@ function toggleEditor() {
 
 function nextSection() {
     console.log("next")
-    showSection(json_data[`section${currentSectionIndex}`])
+    const nextBtn = document.getElementById("btn-span")
+    const btnBrk = document.getElementById("btn-break")
+    nextBtn.remove();
+    btnBrk.remove();
+    document.getElementById("sec-text").append(nextBtn);
+    document.getElementById("sec-text").append(btnBrk);
+    let sectionKeys = Object.keys(json_data).filter(key => key.startsWith("section"));
+    if (currentSectionIndex == sectionKeys.length) {
+        nextBtn.style = "background-color: var(--orange)"
+        nextBtn.innerText = "End"
+    } else {
+        showSection(json_data[`section${currentSectionIndex}`])
+    }
 }
 
 async function loadDataHTML() {
@@ -378,34 +390,34 @@ function runCode() {
     });
 }
 
-const hint = document.querySelector(".code-overlay");
+// const hint = document.querySelector(".code-overlay");
 
-// https://stackoverflow.com/questions/76837048/creating-the-simplest-html-toggle-button
-const hint_button = document.getElementById('hint')
-hint_button.addEventListener('click', (e) => e.target.closest('button').classList.toggle('pressed'))
+// // https://stackoverflow.com/questions/76837048/creating-the-simplest-html-toggle-button
+// const hint_button = document.getElementById('hint')
+// hint_button.addEventListener('click', (e) => e.target.closest('button').classList.toggle('pressed'))
 
-function giveHint() {
-    if (hint.innerText.trim() == "") {
-        console.log("toggle on")
-        hint.innerText = "my_num = 8\nprint(my_num)";
-        var lastLine = editor.lineCount() - 1;
-        if (editor.getLine(lastLine).trim() != "") {
-            const Pos = editor.constructor.Pos;
-            editor.replaceRange("\n", Pos(editor.lineCount(), 0));
-        }
+// function giveHint() {
+//     if (hint.innerText.trim() == "") {
+//         console.log("toggle on")
+//         hint.innerText = json_data;
+//         var lastLine = editor.lineCount() - 1;
+//         if (editor.getLine(lastLine).trim() != "") {
+//             const Pos = editor.constructor.Pos;
+//             editor.replaceRange("\n", Pos(editor.lineCount(), 0));
+//         }
 
-        lastLine = editor.lineCount() - 1
-        const coords = editor.charCoords({ line: lastLine, ch: 0 }, "page");
-        const editorCoords = editor.getWrapperElement().getBoundingClientRect();
+//         lastLine = editor.lineCount() - 1
+//         const coords = editor.charCoords({ line: lastLine, ch: 0 }, "page");
+//         const editorCoords = editor.getWrapperElement().getBoundingClientRect();
 
-        hint.style.top = `${coords.top - editorCoords.top - 2.5}px`;
-        hint.style.left = `${coords.left - editorCoords.left}px`;
-    }
-    else {
-        console.log("toggle off")
-        hint.innerText = "";
-    }
-}
+//         hint.style.top = `${coords.top - editorCoords.top - 2.5}px`;
+//         hint.style.left = `${coords.left - editorCoords.left}px`;
+//     }
+//     else {
+//         console.log("toggle off")
+//         hint.innerText = "";
+//     }
+// }
 
 
 async function checkAnswerCode() {
@@ -475,10 +487,24 @@ async function checkAnswerCode() {
 
 
 function correct() {
-    // do animation
-    setTimeout(() => {
-        return
-    }, 300);
+    const overlay_lst = Array.from(document.getElementsByClassName("overlay"))
+
+    let overlay_new = overlay_lst.filter(item => !item.parentNode.classList.contains("hidden"));
+
+    overlay_new.forEach((overlay) => {
+
+        overlay.style.opacity = 1;
+        overlay.setAttribute('transition-style', 'in:wipe:right');
+
+        setTimeout(() => {
+            overlay.setAttribute('transition-style', 'out:wipe:right');
+            overlay.addEventListener("animationend", () => {
+                overlay.removeAttribute("transition-style");
+                overlay.style.opacity = 0;
+            }, { once: true });
+        }, 1200);
+
+    });
 }
 
 function incorrect() {

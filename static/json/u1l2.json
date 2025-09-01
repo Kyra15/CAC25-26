@@ -12,7 +12,7 @@
     },
     "section3": {
         "header": "Logic operators",
-        "text": "Python uses words like “and,” “not,” and “or” to symbolize logic expressions.<br>Logic expressions are similar to math operators in Python in that they also compare two objects, but they have outputs based on specific rules.<br><br>A and B: A and B both must be true<br>A or B: at least one of A and B has to be true<br>not A: take the opposite value",
+        "text": "Python uses words like “and,” “not,” and “or” to symbolize logic expressions.<br>Logic expressions are similar to math operators in Python in that they also compare two objects, but they have outputs based on specific rules.<br><br>A and B: A and B both must be true<br>A or B: at least one of A and B has to be true<br>not A: take the opposite value*quiz*",
         "activity": {
             "Which of these is not a logic operator?": ["And", "Not", "But", "Or"],
             "Given A and B are booleans, what would an <code>or</code> mean?": ["Both A and B must be true", "A or B but not both must be true", "Both A and B must be false", "At least one of A and B has to be true"],
@@ -44,7 +44,7 @@
         "header": "Elif",
         "text": "The final type of statement we can have is an elif (short for else-if). This acts as both an else and an if. The structure is always if-elif-else, however you can have as many elifs as you want. Elifs will execute if the first condition (the one in the if statement) is not true AND another condition that’s provided within the elif is met.<br><br>For example:<br>{{CODE_BLOCK_0}}<br>If claim is not true, but claim 2 is, then the program prints elif1. If claim and claim 2 are both not true but claim 3 is, then the program prints elif2. Finally if none of the claims are true, then it prints else.*edit*",
         "code": ["if claim:\n    print(\"if\")\nelif claim2:\n    print(\"elif1\")\nelif claim3:\n    print(\"elif2\")\nelse:\n    print(\"else\")"],
-        "activity": "Write a grading system. If the grade (any number) is greater than 90, print 'A'. If it’s greater than 80 but less than 90, print 'B'. Anything below that should print 'C'.",
+        "activity": "Write a grading system. If the variable 'grade' (any number) is greater than 90, print 'A'. If it’s greater than 80 but less than 90, print 'B'. Anything below that should print 'C'.",
         "answer": [["if", "elif", "else"], ["A", "B", "C"], [{"grade": "95"}, {"grade": "85"}, {"grade": "65"}]]
     },
     "end": "Great job! Continue to the next section to see how we store large chunks of data."
